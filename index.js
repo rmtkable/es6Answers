@@ -18,8 +18,8 @@
 // Update the code so it only uses the let keyword.
 
 
-let catName;
-let quote;
+var catName;
+var quote;
 function catTalk() {
   "use strict";
 
