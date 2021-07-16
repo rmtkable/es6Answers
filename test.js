@@ -1,7 +1,12 @@
-import { uppercaseString } from './index';
-
-// const sum = (...args) => {
-//     const args = [x, y, z];
-//     return args.reduce((a, b) => a + b, 0);
-//   }
-  console.log(uppercaseString('alllowercase'));
+for (i = 0; i < 10; i++){
+  if(i === 5 || i === 3){
+    continue;
+  }
+  //loop body
+      console.log(i);
+      if(i === 7){
+        console.log('the loop is broken')
+        break;
+      }
+      }
+  
