@@ -18,8 +18,8 @@
 // Update the code so it only uses the let keyword.
 
 
-var catName;
-var quote;
+let catName;
+let quote;
 function catTalk() {
   "use strict";
 
@@ -92,7 +92,7 @@ function checkScope() {
     'use strict';
     var i = 'function scope';
     if (true) {
-      i = 'block scope';
+      let i = 'block scope';
       console.log('Block scope i is: ', i);
     }
     console.log('Function scope i is: ', i);
@@ -119,9 +119,9 @@ function checkScope() {
   
     // Only change code below this line
   
-    var sentence = str + " is cool!";
-    for (var i = 0; i < str.length; i+=2) {
-      console.log(sentence);
+    const SENTENCE = str + " is cool!";
+    for (let i = 0; i < str.length; i+=2) {
+      console.log(SENTENCE);
     }
   
     // Only change code above this line
@@ -158,7 +158,10 @@ function editInPlace() {
   // Only change code below this line
 
   // Using s = [2, 5, 7] would be invalid
-
+  s[0] = 2;
+  s[1] = 5;
+  s[2] = 7;
+console.log(s);
   // Only change code above this line
 }
 editInPlace();
@@ -189,7 +192,7 @@ function freezeObj() {
       PI: 3.14
     };
     // Only change code below this line
-  
+    Object.freeze(MATH_CONSTANTS);
   
     // Only change code above this line
     try {
@@ -213,6 +216,7 @@ function freezeObj() {
   //   return myVar;
   // }
   // ES6 provides us with the syntactic sugar to not have to write anonymous functions this way. Instead, you can use arrow function syntax:
+
   
   // const myFunc = () => {
   //   const myVar = "value";
@@ -225,7 +229,7 @@ function freezeObj() {
   
   // Rewrite the function assigned to the variable magic which returns a new Date() to use arrow function syntax. Also, make sure nothing is defined using the keyword var.
 //setup
-  var magic = function() {
+  const magic = () => {
     "use strict";
     return new Date();
   };
@@ -248,7 +252,7 @@ function freezeObj() {
   // multiplier(4, 2); // returns 8
   // Rewrite the myConcat function which appends contents of arr2 to arr1 so that the function uses arrow function syntax.
 
-  var myConcat = function(arr1, arr2) {
+  const myConcat = (arr1, arr2) => {
     "use strict";
     return arr1.concat(arr2);
   };
@@ -271,10 +275,9 @@ function freezeObj() {
 // Modify the function increment by adding default parameters so that it will add 1 to number if value is not specified.
 
 // Only change code below this line
-const increment = (number, value) => number + value;
+const increment = (number, value = 1) => number + value;
 // Only change code above this line
-
-
+increment(3);
 
 
 // 9. Use the Rest Parameter with Function Parameters
@@ -300,7 +303,7 @@ function howMany(...args) {
 
   //setup
 
-const sum = (x, y, z) => {
+const sum = (...args) => {
     const args = [x, y, z];
     return args.reduce((a, b) => a + b, 0);
   }
@@ -331,7 +334,7 @@ const sum = (x, y, z) => {
   const arr1 = ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
 let arr2;
 
-arr2 = [];  // Change this line
+arr2 = [...arr1];  // Change this line
 
 console.log(arr2);
 
@@ -403,8 +406,7 @@ const HIGH_TEMPERATURES = {
   
   // Only change code below this line
   
-  const today = HIGH_TEMPERATURES.today;
-  const tomorrow = HIGH_TEMPERATURES.tomorrow;
+const {today: highToday, tomorrow: highTomorrow} = HIGH_TEMPERATURES;
   
   // Only change code above this line
   
@@ -439,9 +441,8 @@ const HIGH_TEMPERATURES = {
   };
   
   // Only change code below this line
-    
-  const lowToday = LOCAL_FORECAST.today.low;
-  const highToday = LOCAL_FORECAST.today.high;
+
+  const {today: {low: lowToday, high: highToday}} = LOCAL_FORECAST;
   
   // Only change code above this line
   
@@ -466,7 +467,7 @@ const HIGH_TEMPERATURES = {
   //setup
   let a = 8, b = 6;
 // Only change code below this line
-
+[a,b] = [b,a];
 
 
 
@@ -487,7 +488,7 @@ const source = [1,2,3,4,5,6,7,8,9,10];
 function removeFirstTwo(list) {
   "use strict";
   // Only change code below this line
-  const arr = list; // Change this line
+  const [a, b, ...arr] = list; // Change this line
   // Only change code above this line
   return arr;
 }
@@ -527,7 +528,7 @@ const stats = {
   };
   
   // Only change code below this line
-  const half = (stats) => (stats.max + stats.min) / 2.0; 
+  const half = ({max, min}) => (max + min) / 2.0; 
   // Only change code above this line
   
 
@@ -571,6 +572,9 @@ const result = {
   function makeList(arr) {
     // Only change code below this line
     const failureItems = [];
+    for (let i = 0; i < arr.length; i++){
+      failureItems.push(`<li class="text-warning">${arr[i]}</li>`);
+    }
     // Only change code above this line
   
     return failureItems;
@@ -587,16 +591,16 @@ const result = {
 //   x: x,
 //   y: y
 // });
-// getMousePosition is a simple function that returns an object containing two properties. ES6 provides the syntactic sugar to eliminate the redundancy of having to write x: x. You can simply write x once, and it will be converted tox: x (or something equivalent) under the hood. Here is the same function from above rewritten to use this new syntax:
+// getMousePosition is a simple function that returns an object containing two properties. ES6 provides the syntactic sugar to eliminate the redundancy of having to write x: x. You can simply write x once, and it will be converted to x: x (or something equivalent) under the hood. Here is the same function from above rewritten to use this new syntax:
 
 // const getMousePosition = (x, y) => ({ x, y });
 // Use object property shorthand with object literals to create and return an object with name, age and gender properties.
 const createPerson = (name, age, gender) => {
     // Only change code below this line
     return {
-      name: name,
-      age: age,
-      gender: gender
+      name,
+      age,
+      gender
     };
     // Only change code above this line
   };
@@ -623,7 +627,7 @@ const createPerson = (name, age, gender) => {
 // Only change code below this line
 const bicycle = {
     gear: 2,
-    setGear: function(newGear) {
+    setGear(newGear) {
       this.gear = newGear;
     }
   };
@@ -660,7 +664,11 @@ const bicycle = {
 // The Vegetable class allows you to create a vegetable object with a property name that gets passed to the constructor.
 
 // Only change code below this line
-
+class Vegetable {
+  constructor(name){
+    this.name = name;
+  }
+}
 // Only change code above this line
 
 const carrot = new Vegetable('carrot');
@@ -706,6 +714,18 @@ console.log(carrot.name); // Should display 'carrot'
 
 // In other words, you are abstracting implementation details from the user.
 
+class Thermostat{
+  constructor(fahrenheit){
+    this.fahrenheit = fahrenheit;
+  }
+  get temperature(){
+    return (5/9) * (this.fahrenheit - 32);
+  }
+  set temperature(celsius){
+    this.fahrenheit = (celsius * 9) / 5 + 32;
+  }
+}
+
 
 
 // 22 ES6: Create a Module Script
@@ -717,9 +737,7 @@ console.log(carrot.name); // Should display 'carrot'
 // Add a script to the HTML document of type module and give it the source file of index.js
 <html>
   <body>
-    {/*  Only change code below this line 
-
-     Only change code above this line */}
+    <script src="index.js" type="module"></script>
   </body> 
 </html>
 
@@ -743,13 +761,15 @@ console.log(carrot.name); // Should display 'carrot'
 // export { add, subtract };
 // There are two string-related functions in the editor. Export both of them using the method of your choice.
 
- const uppercaseString = (string) => {
+ export const uppercaseString = (string) => {
     return string.toUpperCase();
   }
   
- const lowercaseString = (string) => {
+ export const lowercaseString = (string) => {
     return string.toLowerCase()
   }
+
+  export { uppercaseString, lowercaseString};
 
 //   24 ES6: Reuse JavaScript Code Using import
 // import allows you to choose which parts of a file or module to load. In the previous lesson, the examples exported add from the math_functions.js file. Here's how you can import it to use in another file:
@@ -762,6 +782,7 @@ console.log(carrot.name); // Should display 'carrot'
 // import { add, subtract } from './math_functions.js';
 // Add the appropriate import statement that will allow the current file to use the uppercaseString and lowercaseString functions you exported in the previous lesson. These functions are in a file called string_functions.js, which is in the same directory as the current file.
 
+import { uppercaseString, lowercaseString } from './strings_functions.js';
   
 // Only change code above this line
 
@@ -778,6 +799,7 @@ lowercaseString("WORLD!");
 // myMathModule.subtract(5,3);
 // The code in this file requires the contents of the file: string_functions.js, that is in the same directory as the current file. Use the import * as syntax to import everything from the file into an object called stringFunctions.
 
+import * as stringFunctions from './string_functions.js'
 // Only change code above this line
 
 stringFunctions.uppercaseString("hello");
@@ -807,6 +829,9 @@ function subtract(x, y) {
     return x - y;
   }
 
+  export default function(x,y){
+    return x - y;
+  }
   
 
 //   27 ES6: Import a Default Export
@@ -817,6 +842,8 @@ function subtract(x, y) {
 
 // In the following code, import the default export from the math_functions.js file, found in the same directory as this file. Give the import the name subtract.
   
+
+import subtract from './math_functions.js';
 // Only change code above this line
 
 subtract(7,4);
@@ -829,6 +856,9 @@ subtract(7,4);
 // });
 // Create a new promise called makeServerRequest. Pass in a function with resolve and reject parameters to the constructor.
 
+const makeServerRequest = new Promise((resolve, reject) => {
+
+})
 
 
 // 29 ES6: Complete a Promise with resolve and reject
@@ -849,9 +879,10 @@ const makeServerRequest = new Promise((resolve, reject) => {
     let responseFromServer;
       
     if(responseFromServer) {
-        
+        resolve('We got the data');
       // Change this line
     } else {  
+      reject("Data not received");
       // Change this line
     }
   });
@@ -876,6 +907,10 @@ const makeServerRequest = new Promise((resolve, reject) => {
       reject("Data not received");
     }
   });
+
+  makeServerRequest.then(result => {
+    console.log(result);
+  })
 
 //   31 ES6: Handle a Rejected Promise with catch
 
@@ -902,3 +937,7 @@ const makeServerRequest = new Promise((resolve, reject) => {
   makeServerRequest.then(result => {
     console.log(result);
   });
+
+  makeServerRequest.catch(error => {
+    console.log(error);
+  })
